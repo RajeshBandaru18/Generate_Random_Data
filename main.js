@@ -39,7 +39,7 @@ app.get("/generate", async(req, res)=>{
             salary: Math.floor(Math.random()*200000),
             language: getRandom(randomeLang),
             city: getRandom(randomCities),
-            isManager: Math.random(0,1)>0.5?true:false
+            isManager: Math.random()>0.5?true:false
         })
         console.log(data)
         
