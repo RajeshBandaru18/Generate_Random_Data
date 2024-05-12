@@ -2,6 +2,7 @@ import express from "express"
 import mongoose from "mongoose"
 const conn = await mongoose.connect("mongodb://localhost:27017/company")
 import Employee from "./models/employee.js"
+import e from "express"
 const app = express()
 const port = 3000
 
@@ -33,17 +34,17 @@ app.get("/generate", async(req, res)=>{
     //For loop for inserting data into employee collection and gerating random data on console
     for (let index = 0; index < 10; index++){
         //The bellow command will create documents and insert the documents into Employee module
-        let e = await Employee.create({
+        let data = await Employee.create({
             name: getRandom(randomName),
             salary: Math.floor(Math.random()*200000),
             language: getRandom(randomeLang),
             city: getRandom(randomCities),
             isManager: Math.random(0,1)>0.5?true:false
         })
-        console.log(e)
+        console.log(data)
         
     }
-    res.render('index', {foo: 'FOO'})
+    res.render('index', {data: data})
 })
 app.listen(port, ()=>{
     console.log(`listening at port ${port}`)
